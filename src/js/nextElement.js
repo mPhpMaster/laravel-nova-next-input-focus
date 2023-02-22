@@ -1,8 +1,8 @@
 /**
- * v1.0.0
+ * v1.1.0
  */
 class nextElement {
-    static #_log = false;
+    static #_log = true;
     #_enabled = false;
     #_selectorFixer;
     #_selectors;
@@ -17,9 +17,18 @@ class nextElement {
     constructor(options = {
         enabled: true, delimiter: ",", triggerKey: "enter", submitTriggerKey: "ctrl+s", selectors: "select,textarea,input", preSelector: '[index]', selectorFixer: undefined, when: [], eventName: "keydown"
     }) {
-        options = Object.assign({}, options, {
-            enabled: true, delimiter: ",", triggerKey: "enter", submitTriggerKey: options['submitTriggerKey'] === null ? "" : "ctrl+s", selectors: "select,textarea,input", preSelector: '[index]', selectorFixer: undefined, when: [], eventName: "keydown"
-        });
+        let def = {
+            enabled: options['submitTriggerKey'] !== false,
+            delimiter: ",",
+            triggerKey: "enter",
+            submitTriggerKey: options['submitTriggerKey'] === null ? "" : "ctrl+s",
+            selectors: "select,textarea,input",
+            preSelector: '[index]',
+            selectorFixer: undefined,
+            when: [],
+            eventName: "keydown"
+        };
+        options = Object.assign({}, options, def);
         this.#_enabled = options['enabled'];
         this.setDelimiter(options['delimiter']);
         this.setTriggerKey(options['triggerKey'] || "enter");
@@ -37,6 +46,7 @@ class nextElement {
 
             this.when(...whenCondition);
         }
+        nextElement.log(["[NOVA]", " NextElement: ","Preparing!"]);
 
         whenReady(() => {
             this.#prepare();
@@ -62,7 +72,7 @@ class nextElement {
                 $focusOn.select && $focusOn.select();
             }
         });
-        nextElement.log(["\n[NOVA]", " NextElement:\n", "Attached!\n"]);
+        nextElement.log(["[NOVA]", " NextElement: ", "Attached!"]);
 
         return this;
     }
@@ -217,7 +227,7 @@ class nextElement {
             return false;
         }
 
-        nextElement.log('nextElement Script Triggered!');
+        // nextElement.log('nextElement Script Triggered!');
         let {key, shiftKey, metaKey, ctrlKey, altKey, target} = e;
         let $key = String(key).trim().toLocaleLowerCase();
         let test = ctrlKey === false && metaKey === false && altKey === false && $key === this.#_triggerKey;
@@ -259,6 +269,15 @@ class nextElement {
 
     static log(message = "", type = 'log', instance) {
         if ((instance || this).#_log) {
+            if (Array.isArray(message) && message.length < 3) {
+                for (let i = 3; i > 0; i++) {
+                    message.push("");
+                    if (message.length + i >= 3) {
+                        break;
+                    }
+                }
+            }
+
             let prefix = Array.isArray(message) ? message.shift() : '--';
             let $APP = Array.isArray(message) ? message.shift() : '[NextElement]';
             message = Array.isArray(message) ? message.shift() : message;

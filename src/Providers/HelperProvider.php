@@ -37,7 +37,7 @@ class HelperProvider extends ServiceProvider
         }
 
         Nova::serving(function(ServingNova $event) {
-            Nova::provideToScript([ 'next_input_focus' => config('nova-next-input-focus-config', [ 'enabled' => false ]) ]);
+            Nova::provideToScript([ 'next_input_focus' => config('laravel_nova_next_input_focus', [ 'enabled' => false ]) ]);
         });
 
         Nova::serving(function(ServingNova $event) {

@@ -1,6 +1,6 @@
 {
     "name": "mphpmaster/laravel-nova-next-input-focus",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Laravel Nova Next Input Auto Focus",
     "type": "library",
     "keywords": [
