@@ -1,0 +1,48 @@
+{
+    "name": "mphpmaster/laravel-nova-next-input-focus",
+    "version": "1.0.0",
+    "description": "Laravel Nova Next Input Auto Focus",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "functions",
+        "helpers",
+        "nova",
+        "next",
+        "inputs",
+        "javascripts"
+    ],
+    "require": {
+        "php": ">=8.1",
+        "laravel/framework": ">=9",
+        "illuminate/support": ">=9",
+        "laravel/helpers": "^1.5",
+        "laravel/nova": "~4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mPhpMaster",
+            "email": "59211285+mPhpMaster@users.noreply.github.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MPhpMaster\\LaravelNovaNextInputFocus\\": "src/"
+        },
+        "files": [
+            "src/Helpers/FHelpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MPhpMaster\\LaravelNovaNextInputFocus\\Providers\\HelperProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}
